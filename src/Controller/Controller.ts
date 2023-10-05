@@ -2,7 +2,7 @@ import product_model from '../Model/Product_info';
 import seller_model from '../Model/Seller_info';
 const product = product_model();
 const seller = seller_model();
-const shoppingCart: string[] = [];
+const shoppingCart: any= [];
 
 exports.NotFound = (req: any, res: any) => res.send({ message: 'invalid URL!' });
 
@@ -130,6 +130,31 @@ exports.countCartItems = (req, res) => {
     res.status(500).send({ message: 'Internal server error' });
   }
 };
+
+// Controller.js
+
+// Remove a product from the shopping cart
+exports.removeFromCart = (req, res) => {
+  try {
+    const productId = req.params.productId;
+
+    // Find the index of the product in the shopping cart
+    const productIndex = shoppingCart.findIndex((item) => item.productId === productId);
+
+    if (productIndex === -1) {
+      return res.status(404).send({ message: 'Product not found in the cart' });
+    }
+
+    // Remove the product from the cart
+    shoppingCart.splice(productIndex, 1);
+
+    res.send({ message: 'Product removed from the cart', shoppingCart });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: 'Internal server error' });
+  }
+};
+
 
 
 
