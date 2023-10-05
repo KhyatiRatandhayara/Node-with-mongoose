@@ -21,8 +21,13 @@ module.exports = (app: any) => {
     // edit product
     app.put('/removeSeller/:sellerID', Controller.removeSeller);
     app.get('/countCartItems', Controller.countCartItems);
-// Remove a product from the shopping cart
-app.delete('/removeFromCart/:productId', Controller.removeFromCart);
+    // Remove a product from the shopping cart
+    app.delete('/removeFromCart/:productId', Controller.removeFromCart);
+    // routes.js
+
+    // Remove a product from the shopping cart
+    app.get('/calculateTotalCost', Controller.calculateTotalCost);
+
     //if invalid url passed
     app.get('*', Controller.NotFound);
 }

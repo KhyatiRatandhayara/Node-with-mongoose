@@ -154,6 +154,22 @@ exports.removeFromCart = (req, res) => {
     res.status(500).send({ message: 'Internal server error' });
   }
 };
+// Controller.js
+
+// Calculate the total cost of items in the shopping cart
+exports.calculateTotalCost = (req, res) => {
+  try {
+    // Assuming you have a shoppingCart array with cart items
+    const totalCost = shoppingCart.reduce((total, item) => {
+      return total + item.price * item.quantity;
+    }, 0);
+
+    res.send({ totalCost });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: 'Internal server error' });
+  }
+};
 
 
 
